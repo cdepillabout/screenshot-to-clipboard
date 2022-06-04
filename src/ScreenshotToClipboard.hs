@@ -2,17 +2,20 @@
 module ScreenshotToClipboard where
 
 import Control.Monad (when)
+import Data.Functor (void)
 import GI.Gdk (displayGetDefault)
+import GI.GdkPixbuf (pixbufNewFromFile)
+import GI.Gtk ( clipboardGetDefault, clipboardStore, clipboardSetImage )
+import qualified GI.Gtk as Gtk
 import System.Exit (ExitCode(ExitSuccess))
 import System.FilePath ((</>))
 import System.IO.Temp (withSystemTempDirectory)
 import System.Process (readProcessWithExitCode)
-import GI.Gtk ( clipboardGetDefault, clipboardStore, clipboardSetImage )
-import GI.GdkPixbuf (pixbufNewFromFile)
 
 defaultMain :: IO ()
 defaultMain =
   withSystemTempDirectory "screenshot-to-clipboard" $ \tempdir -> do
+    void $ Gtk.init Nothing
     let imgPath = tempdir </> "image.png"
     (importExitCode, _, _) <- readProcessWithExitCode "import" [imgPath] ""
     when (importExitCode /= ExitSuccess) $
