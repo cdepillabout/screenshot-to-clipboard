@@ -43,12 +43,16 @@ final: prev: {
   # convenient for hacking on this package while getting Haskell dependencies
   # from Nixpkgs.
   hacking-on-screenshot-to-clipboard-shell = final.haskellPackages.shellFor {
-    withHoogle = false;
+    withHoogle = true;
     packages = hpkgs: [ hpkgs.screenshot-to-clipboard ];
     nativeBuildInputs = [
+      # Tools for Haskell development.
       final.cabal-install
       final.ghcid
       final.haskellPackages.haskell-language-server
+
+      # This is for the `image` command used by screenshot-to-clipboard.
+      final.imagemagick
     ];
   };
 }
