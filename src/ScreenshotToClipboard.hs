@@ -5,7 +5,7 @@ import Control.Monad (when)
 import Data.Functor (void)
 import GI.Gdk (displayGetDefault)
 import GI.GdkPixbuf (pixbufNewFromFile)
-import GI.Gtk ( clipboardGetDefault, clipboardStore, clipboardSetImage )
+import GI.Gtk (clipboardGetDefault, clipboardStore, clipboardSetImage, onClipboardOwnerChange)
 import qualified GI.Gtk as Gtk
 import System.Exit (ExitCode(ExitSuccess))
 import System.FilePath ((</>))
@@ -25,8 +25,10 @@ defaultMain =
     display <-
       maybe (err "could not get default display from GDK") pure =<< displayGetDefault
     clipboard <- clipboardGetDefault display
+    void $ onClipboardOwnerChange clipboard $ const Gtk.mainQuit
     clipboardSetImage clipboard imgPixbuf
     clipboardStore clipboard
+    Gtk.main
   where
     err :: String -> a
     err e = error $ "screenshot-to-clipboard: " <> e
