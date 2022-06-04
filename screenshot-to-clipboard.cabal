@@ -20,6 +20,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     ScreenshotToClipboard
   other-modules:       Paths_screenshot_to_clipboard
+  autogen-modules:     Paths_screenshot_to_clipboard
   build-depends:       base >= 4.15 && < 5
                      , bytestring
                      , filepath
