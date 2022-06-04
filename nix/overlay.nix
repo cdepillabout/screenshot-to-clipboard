@@ -35,6 +35,7 @@ final: prev: {
             (hfinal.callCabal2nix "screenshot-to-clipboard" src { })
             [ final.haskell.lib.compose.disableLibraryProfiling
               (final.haskell.lib.compose.overrideCabal (oldAttrs: {
+                # TODO: Should this be using wrapGAppsHook (like Termonad) instead of just makeWrapper??
                 buildTools = oldAttrs.buildTools or [] ++ [ final.buildPackages.makeWrapper ];
                 postInstall = oldAttrs.postInstall or "" + ''
                   wrapProgram "$out/bin/screenshot-to-clipboard" \
