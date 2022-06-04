@@ -31,8 +31,17 @@ final: prev: {
             };
 
           in
-          prev.haskell.lib.compose.disableLibraryProfiling
-            (hfinal.callCabal2nix "screenshot-to-clipboard" src { });
+          final.lib.pipe
+            (hfinal.callCabal2nix "screenshot-to-clipboard" src { })
+            [ final.haskell.lib.compose.disableLibraryProfiling
+              (final.haskell.lib.compose.overrideCabal (oldAttrs: {
+                buildTools = oldAttrs.buildTools or [] ++ [ final.buildPackages.makeWrapper ];
+                postInstall = oldAttrs.postInstall or "" + ''
+                  wrapProgram "$out/bin/screenshot-to-clipboard" \
+                    --prefix 'PATH' ':' "${final.imagemagick}/bin"
+                '';
+              }))
+            ];
       };
   };
 
