@@ -1,7 +1,7 @@
 
 # `screenshot-to-clipboard`
 
-[![CI](https://github.com/cdepillabout/screenshot-to-clipboard/actions/workflows/ci.yml/badge.svg)](https://github.com/cdepillabout/screenshot-to-clipboard/actions/workflows/ci.yml)
+[![CI](https://github.com/cdepillabout/screenshot-to-clipboard/actions/workflows/ci.yaml/badge.svg)](https://github.com/cdepillabout/screenshot-to-clipboard/actions/workflows/ci.yaml)
 [![Hackage](https://img.shields.io/hackage/v/screenshot-to-clipboard.svg)](https://hackage.haskell.org/package/screenshot-to-clipboard)
 [![Stackage LTS](http://stackage.org/package/screenshot-to-clipboard/badge/lts)](http://stackage.org/lts/package/screenshot-to-clipboard)
 [![Stackage Nightly](http://stackage.org/package/screenshot-to-clipboard/badge/nightly)](http://stackage.org/nightly/package/screenshot-to-clipboard)
